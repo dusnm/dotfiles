@@ -245,3 +245,4 @@ exec gxkb
 bindsym $mod+Shift+f exec firefox
 bindsym $mod+Shift+g exec google-chrome-stable
 bindsym $mod+Shift+t exec thunar   
+bindsym $mod+Shift+d exec dmenu_extended_run

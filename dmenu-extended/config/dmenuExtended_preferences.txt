@@ -1,5 +1,5 @@
 {
-    "alias_applications": true,
+    "alias_applications": false,
     "alias_display_format": "{name}",
     "exclude_items": [],
     "filebrowser": "xdg-open",
@@ -9,7 +9,7 @@
     "frequently_used": 0,
     "global_ignore_folders": [],
     "ignore_folders": [],
-    "include_applications": true,
+    "include_applications": false,
     "include_binaries": false,
     "include_hidden_files": false,
     "include_hidden_folders": false,
@@ -17,9 +17,9 @@
     "indicator_alias": "",
     "indicator_edit": "*",
     "indicator_submenu": "->",
-    "menu": "dmenu",
+    "menu": "rofi",
     "menu_arguments": [
-        "-b",
+        "-c",
         "-i",
         "-nf",
         "#888888",
@@ -32,7 +32,8 @@
         "-fn",
         "terminus",
         "-l",
-        "20"
+        "20",
+	"-dmenu"
     ],
     "password_helper": [
         "zenity",
@@ -43,7 +44,7 @@
     "path_shellCommand": "~/.dmenuEextended_shellCommand.sh",
     "prompt": "Open:",
     "scan_hidden_folders": false,
-    "terminal": "xterm",
+    "terminal": "termite",
     "valid_extensions": [
         "py",
         "svg",
