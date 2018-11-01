@@ -143,8 +143,8 @@ assign [class="RStudio"] $ws3
 assign [class="discord"] $ws7
 assign [class="Skype"] $ws7
 assign [class="Steam"] $ws8
-assign [class="ygopro_vs_links.exe"] $ws8
 assign [class="Thunar"] $ws1
+assign [class="Thunderbird"] $ws1
 
 #Gaps config
 for_window [class="^.*"] border pixel 0
@@ -240,6 +240,7 @@ exec setxkbmap -layout rs latin
 exec_always compton --vsync opengl
 exec xfce4-session
 exec gxkb
+exec cloudsn
 
 #Custom bindings
 bindsym $mod+Shift+f exec firefox
