@@ -1,5 +1,5 @@
 {
-    "default": "Google",
+    "default": "DuckDuckGo",
     "providers": [
         {
             "title": "Google",
