@@ -1,0 +1,13 @@
+#!/bin/sh
+
+choice=`printf "Cancel\nLogout\nReboot\nShutdown" | dmenu -p "Please select an option:"`
+
+case $choice in
+    "Logout") i3-msg exit
+        ;;
+    "Reboot") reboot
+        ;;
+    "Shutdown") shutdown now
+        ;;
+esac
+

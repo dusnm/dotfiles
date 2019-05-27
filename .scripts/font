@@ -1,0 +1,229 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use List::Util qw(first);
+
+# On-the-fly urxvt font resizing.  Like ⌘{+,-}, on mac computers, just
+# way more complicated.
+#
+# Noah K. Tilton <lists@tilton.co>
+#
+# What it does:
+#
+# 1) Emits escape sequences to change the font size in the running console;
+# 2) Persists the changed font size to xresources file.
+#
+# Note: For the time being, the Monaco font is treated as a special
+# case, due to Unicode compatibility issues.  Other fonts may need
+# special treatment, but I'm not using them.  In particular, Monaco only
+# supports unicode in certain pixel sizes.  9, 10, 12, 14 are embedded
+# bitmaps, which means (Except for 10) that they lack certain unicode
+# charmaps.
+#
+# Note: the regexes will only work on xft xrdb entries
+
+#   For this script to work, ~/.Xdefauls should probably contain at
+#   least the following:
+#
+#       urxvt*font
+#       urxvt*boldFont
+#       urxvt*boldColors: on
+#
+# References: man 3 urxvtperl
+#
+#  Debugging:   urxvt --perl-lib ${HOME}/.urxvt -pe font
+
+
+use constant X_RESOURCES => "~/.config/xresources/fonts";
+
+# Whether to restrict Monaco to using only point sizes that support
+# unicode.
+use constant UNICODE_ONLY => 0;
+use constant ENABLE_DPI_SCALING => 1;
+
+use constant FONT_PROPS => qw/font imFont boldFont italicFont boldItalicFont/;
+use constant STANDARD_DPI => 75;
+use constant MM_TO_INCH => 0.0393701;
+
+sub _resize_xft_string
+{
+  my ($self, $key, $delta)      = @_;
+  my (@pieces)                  = split /:/, $self->{fonts}{$key};
+  my (@resized)                 = ();
+  my ($monaco)                  = undef;
+
+  foreach my $piece (@pieces)
+  {
+    # Assumption: xft:fontname comes before pixelsize=whatever
+    $monaco ||= $piece =~ /^Monaco/i;
+
+    # matching string
+    if ($piece =~ /pixelsize=(\d*)/)
+    {
+      my ($old_size)    =  $1;
+      my ($new_size)    =  $old_size;
+
+      # monaco font
+      if ($monaco)
+      {
+        my (@monaco_unicode_sizes) = UNICODE_ONLY 
+                                        ? (8, 9, 10, 11, 13, 15, 16, 18, 21, 22, 28)
+                                        : (1 .. 72) ;
+
+        my ($monaco_default_size) = &{ sub {  my @a = sort { $a <=> $b } @_;
+                                            return ($a[$#a/2] + $a[@a/2]) / 2;}
+        }(@monaco_unicode_sizes); # median ...
+        my ($old_size_index) = first {
+          $monaco_unicode_sizes[$_] eq $old_size } 0..$#monaco_unicode_sizes;
+
+        # old font size is valid
+        if (defined($old_size_index))
+        {
+          # Do bounds checking:
+          #
+          # 1) avoid decrement of smallest font size index to a negative
+          # value --which would undesirably wrap around and set font to
+          # larger size
+          if ($old_size_index > 0 || $delta > 0)
+          {
+            my ($new_size_index)  = $old_size_index + $delta; # +1, equivalently
+            # 2) avoid increment of largest to non-existent larger
+            $new_size             = exists($monaco_unicode_sizes[$new_size_index])
+                                            ? $monaco_unicode_sizes[$new_size_index]
+                                            : $old_size;
+          }
+        }
+        else
+        {
+          # user had an invalid/non-unicode monaco size, reset to default
+          $new_size  = $monaco_default_size;
+        }
+      }
+      else
+      {
+        $new_size += $delta;
+      }
+      $piece =~ s/pixelsize=$old_size/pixelsize=$new_size/;
+    }
+    push @resized, $piece;
+  }
+  return join (":", @resized);
+}
+
+sub _scale_xft_string
+{
+  my ($self, $str) = @_;
+
+  $str =~ s/pixelsize=(\d+)/"pixelsize=" . ($1 * $self->{dpi} \/ STANDARD_DPI)/eg;
+  return $str;
+}
+
+sub update_display
+{
+  my ($self) = @_;
+
+  # Update internal urxvt resource hash
+  #     This is necessary or else the next resize won't have an updated
+  #     value. "font" key is updated by urxvt when cmd_parse is called,
+  #     but boldFont is *not*, at least with the escape sequences I'm
+  #     emitting.
+  foreach my $res (FONT_PROPS) {
+    $self->{term}->resource($res, $self->_scale_xft_string($self->{fonts}{$res}));
+  }
+
+  my $scaled = $self->{term}->resource("font");
+  $self->{term}->cmd_parse("\e]710;$scaled\007");
+}
+
+sub change_size
+{
+  my ($self, $delta) = @_;
+
+  # Update xft strings with font size {+/-}1
+  foreach (FONT_PROPS) {
+    $self->{fonts}{$_} = $self->_resize_xft_string($_, $delta);
+  }
+
+  # Emit escape sequence to change fonts in rxvt runtime
+  $self->update_display;
+
+  # Persist the changes to xrdb
+  system("xrdb -load " . X_RESOURCES);
+  open(XRDB_MERGE, "| xrdb -merge") || die "can't fork: $!";
+  local $SIG{PIPE} = sub { die "xrdb pipe broke" };
+  foreach (FONT_PROPS) {
+    print XRDB_MERGE "urxvt\*$_: $self->{fonts}{$_}\n"
+  }
+  close XRDB_MERGE || die "bad xrdb: $! $?";
+  system("xrdb -edit " . X_RESOURCES);
+}
+
+sub on_user_command
+{
+  # This function is called whenever some urxvt.keysym.*: perl:x:y
+  # mapped in X_RESOURCES is called; where x is this "module" (file,
+  # translation unit...), y is some function in this file (and this
+  # function, if defined), and $cmd is the argument z.
+  #
+  my ($self, $cmd) = @_;
+
+  if ($cmd =~ /font:(..crement)/)   # {in, de, ex}
+  {
+    $self->change_size(($1 eq "increment") ? +1 : -1);
+  }
+}
+
+sub on_init
+{
+  my ($self) = @_;
+
+  ($self->{winx}, $self->{winy}) = (0, 0);
+
+  # Get current font settings
+  foreach (FONT_PROPS) {
+    $self->{fonts}{$_} = $self->{term}->resource($_);
+  }
+  $self->{dpi} = STANDARD_DPI;
+}
+
+sub get_dpi_at
+{
+  my ($px, $py) = @_;
+
+  foreach (grep {m/ connected /} `xrandr 2> /dev/null`) {
+    # Parse monitor dimensions from xrandr output, and skip if the given point
+    # is not on this monitor
+    my ($w, $h, $x, $y, $rot, $wmm, $hmm) = m/\b(\d+)x(\d+)([-+]\d+)([-+]\d+) (\w*).* (\d+)mm x (\d+)mm\b/;
+    next if $px < $x or $py < $y or $px >= $x + $w or $py >= $y + $h;
+    ($wmm, $hmm) = ($hmm, $wmm) if $rot eq "left" or $rot eq "right";
+
+    # Calculate DPI based on width alone for now:
+    #   screen width in pixels / screen width in inches
+    return $w / ($wmm * MM_TO_INCH);
+  }
+  return 0;
+}
+
+sub on_configure_notify
+{
+  my ($self, $event) = @_;
+  my $term = $self->{term};
+
+  return unless ENABLE_DPI_SCALING;
+
+  my ($newx, $newy) = $term->XTranslateCoordinates($term->vt, $term->DefaultRootWindow, 0, 0);
+  $newx += $event->{width}/2;
+  $newy += $event->{height}/2;
+
+  return if $newx == $self->{winx} and $newy == $self->{winy};
+
+  ($self->{winx}, $self->{winy}) = ($newx, $newy);
+  my $dpi = get_dpi_at($newx, $newy);
+  return if $dpi == 0 or $self->{dpi} == $dpi;
+  $self->{dpi} = $dpi;
+  $self->update_display;
+
+  $term->XMoveResizeWindow($term->vt, $event->{x}, $event->{y}, $event->{width}, $event->{height});
+}
+

@@ -1,0 +1,8 @@
+#!/bin/sh
+state=`acpi | awk '/^Battery/ {print $3}'`
+percentage=`acpi | awk '/^Battery/ {print $4}'`
+if [ "$state" = "Charging," ]; then
+    echo 🔌 ${percentage/%?/}
+else
+    echo 🔋 ${percentage/%?/}
+fi

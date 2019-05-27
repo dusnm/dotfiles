@@ -1,6 +1,0 @@
-[colors]
-foreground = #cecece
-background  = rgba(50, 50, 71, 0.85)
-
-[options]
-font = Ubuntu Mono 11

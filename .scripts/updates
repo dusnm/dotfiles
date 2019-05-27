@@ -1,0 +1,8 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+    1) urxvt -e sudo pacman -Syu ;;
+    3) notify-send "$(pacman -Qu)" ;;
+esac
+
+pacman -Qu | wc -l || echo "0"
