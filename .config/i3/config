@@ -231,7 +231,8 @@ bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 # Increase the brig
 # Custom Bindings
 bindsym $mod+Shift+t exec urxvt -e ranger
 bindsym $mod+Shift+f exec firefox
-bindsym Print exec flameshot gui # Considering replacing with scrot
+bindsym Print exec --no-startup-id cd ~/Pictures/Screenshots/ && scrot -q 100
+bindsym --release Shift+Print exec --no-startup-id cd ~/Pictures/Screenshots/ && scrot -q 100 -s
 bindsym $mod+Shift+h exec urxvt -e htop
 bindsym $mod+Shift+m exec --no-startup-id urxvt -e ncmpcpp
 bindsym $mod+Shift+p exec --no-startup-id ~/.scripts/mansplain
