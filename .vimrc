@@ -20,10 +20,11 @@ Plug 'mboughaba/i3config.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
-color onedark
+colorscheme gruvbox
 
 aug i3config_ft_detection
   au!
@@ -36,4 +37,4 @@ set guifont=DroidSansMono\ Nerd\ Font\ 11
 
 set  rtp+=/usr/lib/python3.7/site-packages/powerline/bindings/vim/
 set laststatus=2
-set t_Co=256
+set t_Co=256                           
