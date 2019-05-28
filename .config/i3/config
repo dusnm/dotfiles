@@ -135,6 +135,7 @@ assign [class="Firefox"] $ws2
 assign [class="URxvt"] $ws4
 assign [class="code-oss"] $ws3
 assign [class="Steam"] $ws8
+for_window [class="Spotify"] move to workspace $ws5
 
 # Gaps configuration
 gaps inner 10
