@@ -1,12 +1,14 @@
-#
-# ~/.bashrc
-#
+#  _               _              
+# | |__   __ _ ___| |__  _ __ ___ 
+# | '_ \ / _` / __| '_ \| '__/ __|
+# | |_) | (_| \__ \ | | | | | (__ 
+# |_.__/ \__,_|___/_| |_|_|  \___|
+#                                
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 # Make colorcoding available for everyone
-
 Black='\e[0;30m'        # Black
 Red='\e[0;31m'          # Red
 Green='\e[0;32m'        # Green
@@ -35,15 +37,12 @@ On_Blue='\e[44m'        # Blue
 On_Purple='\e[45m'      # Purple
 On_Cyan='\e[46m'        # Cyan
 On_White='\e[47m'       # White
-
 NC="\e[m"               # Color Reset
-
 
 # new alert text
 ALERT=${BWhite}${On_Red} # Bold White on red background
 
 # mostly used alias functions
-
 alias ref="source ~/.bashrc"
 alias cls="clear"
 alias ..="cd .."
@@ -52,7 +51,6 @@ alias ls="ls -CF --color=auto -lhN --group-directories-first"
 alias lsa="ls -CF --color=auto -lhN --group-directories-first -a"
 alias ll="ls -lisa --color=auto"
 alias lsl="ls -lhFA | less"
-alias home="cd ~"
 alias df="df -ahiT --total"
 alias mkdir="mkdir -pv"
 alias userlist="cut -d: -f1 /etc/passwd"
@@ -65,21 +63,21 @@ alias wget="wget -c"
 alias histg="history | grep"
 alias myip="curl http://ipecho.net/plain; echo"
 alias logs="find /var/log -type f -exec file {} \; | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
-alias folders='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
-alias grep='grep --color=auto'
+alias folders="find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn"
+alias grep="grep --color=auto"
 alias vibash="vim ~/.bashrc"
 alias update="yay -Syu"
-alias less='less -m -N -g -i -J --underline-special --SILENT'
-alias more='less'
+alias pac="pacman"
+alias less="less -m -N -g -i -J --underline-special --SILENT"
+alias more="less" #Prevent the use of more over less
 alias lsb="lsb_release -a"
 alias ua="uname -a"
 alias ur="uname -r"
-alias sdn='shutdown now'
-alias rb='reboot'
-alias vhosts='sudo vim /etc/httpd/conf/extra/httpd-vhosts.conf'
-alias vi3='vim ~/.config/i3/config'
-alias scrot3='cd ~/Pictures/Screenshots/ && scrot -d 3 -q 100'
-
+alias sdn="shutdown now"
+alias rb="reboot"
+alias vhosts="sudo vim /etc/httpd/conf/extra/httpd-vhosts.conf"
+alias vi3="vim ~/.config/i3/config"
+alias vivim="vim ~/.vimrc"
 # Creates an archive (*.tar.gz) from given directory.
 function maketar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
 
@@ -118,21 +116,6 @@ function extract {
 fi
 }
 
-# jump directorys upwards until it hits a directory with multiple folders
-up(){
-  local d=""
-  limit=$1
-  for ((i=1 ; i <= limit ; i++))
-    do
-      d=$d/..
-    done
-  d=$(echo $d | sed 's/^\///')
-  if [ -z "$d" ]; then
-    d=..
-  fi
-  cd $d
-}
-
 # create an directory and directly cd into it
 mcd () {
   mkdir -p $1
@@ -142,7 +125,8 @@ mcd () {
 # set PATH so it includes user's private bin directories
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
-export PS1="\[\033[38;5;12m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\u\[$(tput sgr0)\]\[\033[38;5;12m\]@\[$(tput sgr0)\]\[\033[38;5;7m\]\h\[$(tput sgr0)\]\[\033[38;5;12m\]]\[$(tput sgr0)\]\[\033[38;5;15m\]: \[$(tput sgr0)\]\[\033[38;5;7m\]\w\[$(tput sgr0)\]\[\033[38;5;12m\]>\[$(tput sgr0)\]\[\033[38;5;10m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+# Set prompt and coloring
+export PS1="$BWhite[$BPurple\u$BWhite@$BPurple\h$BWhite] \w \$ "
 
 [ -e "/etc/DIR_COLORS" ] && DIR_COLORS="/etc/DIR_COLORS"
 [ -e "$HOME/.dircolors" ] && DIR_COLORS="$HOME/.dircolors"
@@ -155,13 +139,12 @@ export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
 export LESS=" -R "
 export TERM="screen-256color"
 
+# Uncoment these lines to enable powerline-shell instead of the bash prompt, must have powerline-shell installed
 
-function _update_ps1() {
-	PS1=$(powerline-shell $?)
-}
+#function _update_ps1() {
+#	PS1=$(powerline-shell $?)
+#}
 
-if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
-	PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-fi
-
-eval $(thefuck --alias)
+#if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+#	PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+#fi
