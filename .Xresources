@@ -23,6 +23,10 @@ URxvt.scrollBar: false
 URxvt.cursorColor: white
 URxvt.internalBorder: 20
 
+!! Fake transparency 
+URxvt*transparent: true
+URxvt*shading: 20
+
 !! Extensions
 URxvt.perl-ext-common: default,matcher,url-select,keyboard-select,clipboard
 URxvt.colorUL: #4682B4
