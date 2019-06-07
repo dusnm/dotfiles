@@ -1,0 +1,7 @@
+#!/bin/sh
+
+unsplashUrl="https://source.unsplash.com/random/$1" # $1 is the resolution, example: 1920x1080, 1366x768, etc...
+
+curl $unsplashUrl | grep -Po '(?<=href=")[^"]*' | xargs -r wget -O ~/Pictures/unsplash/$(cat /proc/sys/kernel/random/uuid).jpg
+
+
