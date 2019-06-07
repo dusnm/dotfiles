@@ -51,7 +51,7 @@ source ~/.bash_sources/aliases
 source ~/.bash_sources/functions
 
 # set PATH so it includes user's private bin directories
-PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+PATH="$HOME/bin:$HOME/.local/bin:$HOME/.scripts:$PATH"
 
 # Set prompt and coloring
 export PS1="$BWhite[$BPurple\u$BWhite@$BPurple\h$BWhite] \w \$ "
