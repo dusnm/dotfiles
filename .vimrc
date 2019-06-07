@@ -1,3 +1,10 @@
+"        _                    
+" __   _(_)_ __ ___  _ __ ___ 
+" \ \ / / | '_ ` _ \| '__/ __|
+"  \ V /| | | | | | | | | (__ 
+"   \_/ |_|_| |_| |_|_|  \___|
+"                            
+
 set nocompatible
 set number
 set tabstop=4
@@ -38,4 +45,4 @@ set guifont=DroidSansMono\ Nerd\ Font\ 11
 
 set  rtp+=/usr/lib/python3.7/site-packages/powerline/bindings/vim/
 set laststatus=2
-set t_Co=256                           
+set t_Co=256
