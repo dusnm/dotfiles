@@ -1,0 +1,45 @@
+#!/bin/env bash
+
+#        _ _                     
+#   __ _| (_) __ _ ___  ___  ___ 
+#  / _` | | |/ _` / __|/ _ \/ __|
+# | (_| | | | (_| \__ \  __/\__ \
+#  \__,_|_|_|\__,_|___/\___||___/
+#                               
+
+# mostly used alias functions
+alias ref="source ~/.bashrc"
+alias cls="clear"
+alias ..="cd .."
+alias cd..="cd .."
+alias ls="ls -CF --color=auto -lhN --group-directories-first"
+alias lsa="ls -CF --color=auto -lhN --group-directories-first -a"
+alias ll="ls -lisa --color=auto"
+alias lsl="ls -lhFA | less"
+alias df="df -ahiT --total"
+alias mkdir="mkdir -pv"
+alias userlist="cut -d: -f1 /etc/passwd"
+alias fhere="find . -name "
+alias free="free -mt"
+alias du="du -ach | sort -h"
+alias ps="ps auxf"
+alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias wget="wget -c"
+alias histg="history | grep"
+alias myip="curl http://ipecho.net/plain; echo"
+alias logs="find /var/log -type f -exec file {} \; | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
+alias folders="find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn"
+alias grep="grep --color=auto"
+alias vibash="vim ~/.bashrc"
+alias update="yay -Syu"
+alias pac="pacman"
+alias less="less -m -N -g -i -J --underline-special --SILENT"
+alias more="less" # Prevent the use of more over less
+alias lsb="lsb_release -a"
+alias ua="uname -a"
+alias ur="uname -r"
+alias sdn="shutdown now"
+alias rb="reboot"
+alias vhosts="sudo vim /etc/httpd/conf/extra/httpd-vhosts.conf"
+alias vi3="vim ~/.config/i3/config"
+alias vivim="vim ~/.vimrc"
