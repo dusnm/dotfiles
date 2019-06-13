@@ -241,6 +241,7 @@ bindsym $mod+Shift+s exec --no-startup-id ~/.scripts/ducksearch
 bindsym $mod+Shift+x exec --no-startup-id ~/.scripts/i3power
 bindsym $mod+Shift+e exec --no-startup-id ~/.scripts/dmenuunicode
 bindsym $mod+Shift+grave exec urxvt -e transmission-remote-cli
+bindsym $mod+Shift+z exec --no-startup-id ~/.scripts/comicsearch
 
 # Autostarts
 exec nitrogen --restore

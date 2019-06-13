@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# I posses a ton of comic books, this one liner allows me to quickly search throuth them all and open them with zathura
+
+locate ~/Documents/Comics | sed -e 's/^/"/' -e 's/$/"/' | dmenu -i -l 30 | xargs -r zathura
