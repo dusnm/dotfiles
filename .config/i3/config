@@ -242,6 +242,8 @@ bindsym $mod+Shift+x exec --no-startup-id ~/.scripts/i3power
 bindsym $mod+Shift+e exec --no-startup-id ~/.scripts/dmenuunicode
 bindsym $mod+Shift+grave exec urxvt -e transmission-remote-cli
 bindsym $mod+Shift+z exec --no-startup-id ~/.scripts/comicsearch
+bindsym $mod+Shift+Return exec --no-startup-id  ~/.scripts/i3key
+bindsym $mod+u [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
 
 # Autostarts
 exec nitrogen --restore
@@ -250,3 +252,9 @@ exec autocutsel
 exec wal -R
 exec lxsession
 exec --no-startup-id mpDris2
+
+# Scratchpad
+for_window [instance="dropdown"] floating enable
+for_window [instance="dropdown"] resize set 1366 768
+for_window [instance="dropdown"] move scratchpad
+exec --no-startup-id urxvt -name dropdown
