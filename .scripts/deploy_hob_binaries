@@ -10,7 +10,6 @@
 #  |_| |_|\___/|____/_/   \_\ .__/| .__/|___/
 #                           |_|   |_|
 
-
 HOB_BINARIES_DIRECTORY="/root/hob-binaries"
 HOB_BINARIES_DOCKER_DIRECTORY="/server/static/binaries/hob"
 
