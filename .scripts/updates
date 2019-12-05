@@ -5,4 +5,4 @@ case $BLOCK_BUTTON in
     3) notify-send "$(pacman -Qu)" ;;
 esac
 
-pacman -Qu | wc -l || echo "0"
+pacman -Qu | wc -l
