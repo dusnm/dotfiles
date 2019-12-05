@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ip addr show dev wlo1 | grep -P "inet\s" | awk '{print $2}' | sed "s/\/.*//"
