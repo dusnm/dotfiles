@@ -1,0 +1,6 @@
+#!/bin/sh
+
+HOME=$(df -h /dev/sda1 | awk '/^\//  {print "📁", $6, $3"/"$2}')
+ROOT=$(df -h /dev/sdb2 | awk '/^\// {print "📁", $6, $3"/"$2}')
+
+echo "$ROOT | $HOME"
