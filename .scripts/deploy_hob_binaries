@@ -20,7 +20,7 @@ HOB_DOCKER_WIN_64="$HOB_BINARIES_DOCKER_DIRECTORY/win64/"
 HOB_DOCKER_LINUX="$HOB_BINARIES_DOCKER_DIRECTORY/linux/"
 
 get_production_docker_container_id() {
-    PRODUCTION_CONTAINER_ID="$(docker ps | grep api.hob | awk '/^34/ {print $1}')"
+    PRODUCTION_CONTAINER_ID="$(docker ps | grep "[^\.]api.hob" | awk '{print $1}')"
 }
 
 get_staging_docker_container_id() {
