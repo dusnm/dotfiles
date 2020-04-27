@@ -1,0 +1,56 @@
+#!/usr/bin/env php
+<?php
+/**
+ * RSA key pair generator.
+ *
+ * This script can be used to generate a pem encoded RSA key pair.
+ *
+ * @author Dusan Mitrovic <dusan@dusanmitrovic.xyz>
+ *
+ * @version 1.0.0
+ *
+ * @license GNU General Public License, version 3
+ * @license https://opensource.org/licenses/GPL-3.0
+ */
+define('RSA_KEY_DIGEST_ALG', 'sha512');
+define('RSA_KEY_LENGTH', 4096);
+define('RSA_KEY_DIRECTORY', getcwd().'/keys');
+define('RSA_KEY_PUBLIC_KEY_PATH', getcwd().'/keys/public.pem');
+define('RSA_KEY_PRIVATE_KEY_PATH', getcwd().'/keys/private.pem');
+
+/**
+ * Generates a new RSA key pair in string representation with the provided options.
+ *
+ * @return array Returns an array containing the private and public key
+ */
+function generate_rsa_key_pair(): array
+{
+    $key_pair = openssl_pkey_new([
+        'digest_alg' => RSA_KEY_DIGEST_ALG,
+        'private_key_bits' => RSA_KEY_LENGTH,
+        'private_key_type' => OPENSSL_KEYTYPE_RSA,
+    ]);
+    $key_pair_details = openssl_pkey_get_details($key_pair);
+
+    openssl_pkey_export($key_pair, $private_key);
+
+    return [
+        $private_key,
+        $key_pair_details['key'],
+    ];
+}
+
+if (!file_exists(RSA_KEY_DIRECTORY)) {
+    mkdir(RSA_KEY_DIRECTORY, 0755);
+}
+
+[$private_key, $public_key] = generate_rsa_key_pair();
+
+// The files will be overwritten evry time the script is ran.
+file_put_contents(RSA_KEY_PRIVATE_KEY_PATH, $private_key, LOCK_EX);
+file_put_contents(RSA_KEY_PUBLIC_KEY_PATH, $public_key, LOCK_EX);
+
+// The private key must only be accessible by the owner, we set the permissions accordingly.
+chmod(RSA_KEY_PRIVATE_KEY_PATH, 0600);
+
+printf('Key generation complete. Output in: %s'.PHP_EOL, RSA_KEY_DIRECTORY);
