@@ -14,12 +14,18 @@ set softtabstop=4
 set expandtab
 set noshiftround
 set autoindent
+set splitbelow
+set splitright
 syntax on
 
 noremap <C-j> 5j
 noremap <C-k> 5k
 noremap <C-h> 5h
 noremap <C-l> 5l
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
 
 call plug#begin()
 
@@ -34,11 +40,13 @@ Plug 'StanAngeloff/php.vim'
 Plug 'stephpy/vim-php-cs-fixer'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'AlessandroYorba/Sierra'
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
-let g:sierra_Twilight = 1
-colorscheme sierra
+colorscheme dracula
+
+let g:airline_powerline_fonts = 1
 
 aug i3config_ft_detection
   au!
@@ -49,7 +57,6 @@ map <C-n> :NERDTreeToggle<CR>
 set encoding=UTF-8
 set guifont=DroidSansMono\ Nerd\ Font\ 11
 
-set  rtp+=/usr/lib/python3.8/site-packages/powerline/bindings/vim/
 set laststatus=2
 set t_Co=256
 
