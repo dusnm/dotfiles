@@ -46,7 +46,7 @@ if (!file_exists(RSA_KEY_DIRECTORY)) {
 
 [$private_key, $public_key] = generate_rsa_key_pair();
 
-// The files will be overwritten evry time the script is ran.
+// The files will be overwritten every time the script is ran.
 file_put_contents(RSA_KEY_PRIVATE_KEY_PATH, $private_key, LOCK_EX);
 file_put_contents(RSA_KEY_PUBLIC_KEY_PATH, $public_key, LOCK_EX);
 
