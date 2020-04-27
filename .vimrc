@@ -29,10 +29,16 @@ Plug 'joshdick/onedark.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'morhetz/gruvbox'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'StanAngeloff/php.vim'
+Plug 'stephpy/vim-php-cs-fixer'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'AlessandroYorba/Sierra'
 
 call plug#end()
 
-colorscheme gruvbox
+let g:sierra_Twilight = 1
+colorscheme sierra
 
 aug i3config_ft_detection
   au!
@@ -43,6 +49,8 @@ map <C-n> :NERDTreeToggle<CR>
 set encoding=UTF-8
 set guifont=DroidSansMono\ Nerd\ Font\ 11
 
-set  rtp+=/usr/lib/python3.7/site-packages/powerline/bindings/vim/
+set  rtp+=/usr/lib/python3.8/site-packages/powerline/bindings/vim/
 set laststatus=2
 set t_Co=256
+
+autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
