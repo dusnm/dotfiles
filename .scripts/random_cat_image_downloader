@@ -1,0 +1,57 @@
+#!/usr/bin/env php
+<?php
+/**
+ *  Random Cat Image Downloader
+ *
+ *  This script randomly downloads a cat image and saves it to the ~/Pictures directory
+ *
+ * @author Dusan Mitrovic <dusan@dusanmitrovic.xyz>
+ *
+ * @version 1.0.0
+ *
+ * @license GNU General Public License, version 3
+ * @license https://opensource.org/licenses/GPL-3.0
+ */
+define('CATTURDAY_DIRECTORY', $_SERVER['HOME'].'/Pictures/catturday/');
+define('CATTURDAY_API_URL', 'https://api.thecatapi.com/v1');
+define('CATTURDAY_IMAGE_URL_SCHEME', 'https://cdn2.thecatapi.com/images/');
+
+/**
+ * Calls the API endpoint and fetches the URL for a random cat image
+ *
+ * @return string A random cat image URL
+ */
+function get_image_url(): string
+{
+    $random_cat_object = json_decode(file_get_contents(CATTURDAY_API_URL.'/images/search'));
+
+    return $random_cat_object[0]->url;
+}
+
+/**
+ * Downloads an image from the provided URL and stores it in the user's ~/Pictures directory
+ *
+ * @return string Absolute file path of the downloaded image
+*/
+function download_image_from_url(string $url): string
+{
+    [$url_scheme, $file_name] = explode(CATTURDAY_IMAGE_URL_SCHEME, $url);
+    $downloaded_image_path = CATTURDAY_DIRECTORY.$file_name;
+
+    if (!file_exists(CATTURDAY_DIRECTORY)) {
+        mkdir(CATTURDAY_DIRECTORY, 0755);
+    }
+
+    file_put_contents(
+        $downloaded_image_path,
+        file_get_contents($url),
+        LOCK_EX
+    );
+
+    return $downloaded_image_path;
+}
+
+$random_cat_image_url = get_image_url();
+$downloaded_image_path = download_image_from_url($random_cat_image_url);
+
+printf('Download complete. File saved as: %s'.PHP_EOL, $downloaded_image_path);
