@@ -1,5 +1,13 @@
-#!/bin/sh
+#!/usr/bin/bash
 
-# I posses a ton of comic books, this one liner allows me to quickly search throuth them all and open them with zathura
+COMIC_BOOK_DIRECTORY="$HOME/Documents/Comics"
 
-locate ~/Documents/Comics | sed -e 's/^/"/' -e 's/$/"/' | dmenu -i -l 30 | xargs -r zathura
+CHOICE=`ls $COMIC_BOOK_DIRECTORY | dmenu -i -h 20 -p "Choose what to read:"`
+
+if [ -n "$CHOICE" ]; then
+    COMIC_CHOICE=`locate "$COMIC_BOOK_DIRECTORY/$CHOICE" | grep -E ".*\.(cbr|cbz|cb7)" | dmenu -i -c -h 20 -l 30 -p "Choose an issue:"`
+
+    if [ -n "$COMIC_CHOICE" ]; then
+        zathura "$COMIC_CHOICE"
+    fi
+fi
