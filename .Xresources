@@ -81,3 +81,9 @@ URxvt*depth: 32
 *.color7:       #a39e9b
 *.color15:      #e7e9db
 
+!Dmenu config
+dmenu.font: UbuntuMono Nerd Font:size=12
+dmenu.background: #ffffff
+dmenu.foreground: #e38fa4
+dmenu.selbackground: #e38fa4
+dmenu.selforeground: #ffffff
