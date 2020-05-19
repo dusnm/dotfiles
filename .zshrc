@@ -137,4 +137,5 @@ alias vi3="vim ~/.config/i3/config"
 alias vivim="vim ~/.vimrc"
 alias viz="vim ~/.zshrc"
 
-/opt/shell-color-scripts/colorscript.sh --random
+# Pywal
+(cat ~/.cache/wal/sequences &)
