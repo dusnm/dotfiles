@@ -17,7 +17,7 @@ font pango:Ubuntu 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec --no-startup-id alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -110,7 +110,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # workspace bindings
 assign [class="firefox"] $ws2
-assign [class="URxvt"] $ws4
+assign [class="Alacritty"] $ws4
 assign [class="code-oss"] $ws3
 assign [class="Steam"] $ws8
 for_window [class="Spotify"] move to workspace $ws5
