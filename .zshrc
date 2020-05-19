@@ -139,3 +139,6 @@ alias viz="vim ~/.zshrc"
 
 # Pywal
 (cat ~/.cache/wal/sequences &)
+
+# Pfetch
+pfetch
