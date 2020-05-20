@@ -10,6 +10,9 @@
 # Set SUPER as the mod key
 set $mod Mod4
 
+# Set the terminal
+set $terminal "alacritty"
+
 # Font for window titles
 font pango:Ubuntu 10
 
@@ -17,12 +20,12 @@ font pango:Ubuntu 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+Return exec --no-startup-id $terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
+# start dmenu
 bindsym $mod+d exec --no-startup-id dmenu_run
 
 # change focus
@@ -129,21 +132,21 @@ bindsym $mod+Shift+r restart
 
 # resize window
 mode "resize" {
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -171,17 +174,17 @@ set $sig10 pkill -RTMIN+10 i3blocks
 
 # Bar config
 bar {
-        position top
-        font pango:Hack Nerd Font 9
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
-         colors {
-            background $bg
-                separator #cccccc
-            #                  border           background      text
-            focused_workspace  $bg              $bg             $fg
-            inactive_workspace $bg-inactive     $bg-inactive    $fg
-            urgent_workspace   $bg-urgent       $bg-urgent      $fg
-        }
+    position top
+    font pango:Hack Nerd Font 9
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    colors {
+        background $bg
+        separator #cccccc
+        #                  border           background      text
+        focused_workspace  $bg              $bg             $fg
+        inactive_workspace $bg-inactive     $bg-inactive    $fg
+        urgent_workspace   $bg-urgent       $bg-urgent      $fg
+    }
 
 }
 
@@ -200,12 +203,12 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10 # Decrease the br
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 # Increase the brightness
 
 # Custom Bindings
-bindsym $mod+Shift+t exec alacritty -e ranger
+bindsym $mod+Shift+t exec $terminal -e ranger
 bindsym $mod+Shift+f exec firefox
 bindsym Print exec --no-startup-id cd ~/Pictures/Screenshots/ && scrot -q 100
 bindsym --release Shift+Print exec --no-startup-id cd ~/Pictures/Screenshots/ && scrot -q 100 -s
-bindsym $mod+Shift+h exec alacritty -e htop
-bindsym $mod+Shift+m exec --no-startup-id alacritty -e ncmpcpp
+bindsym $mod+Shift+h exec $terminal -e htop
+bindsym $mod+Shift+m exec --no-startup-id $terminal -e ncmpcpp
 bindsym $mod+Shift+p exec --no-startup-id ~/.scripts/mansplain
 bindsym $mod+Shift+s exec --no-startup-id ~/.scripts/ducksearch
 bindsym $mod+Shift+x exec --no-startup-id ~/.scripts/i3power
