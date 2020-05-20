@@ -11,7 +11,7 @@
 set $mod Mod4
 
 # Set the terminal
-set $terminal "alacritty"
+set $terminal --no-startup-id $TERMINAL
 
 # Font for window titles
 font pango:Ubuntu 10
@@ -20,7 +20,7 @@ font pango:Ubuntu 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id $terminal
+bindsym $mod+Return exec $terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -204,10 +204,10 @@ bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 # Increase the brig
 
 # Custom Bindings
 bindsym $mod+Shift+t exec $terminal -e ranger
-bindsym $mod+Shift+f exec firefox
+bindsym $mod+Shift+f exec $BROWSER
 bindsym Print exec --no-startup-id cd ~/Pictures/Screenshots/ && scrot -q 100
 bindsym --release Shift+Print exec --no-startup-id cd ~/Pictures/Screenshots/ && scrot -q 100 -s
-bindsym $mod+Shift+m exec --no-startup-id $terminal -e ncmpcpp
+bindsym $mod+Shift+m exec $terminal -e ncmpcpp
 bindsym $mod+Shift+p exec --no-startup-id ~/.scripts/mansplain
 bindsym $mod+Shift+s exec --no-startup-id ~/.scripts/ducksearch
 bindsym $mod+Shift+x exec --no-startup-id ~/.scripts/i3power
