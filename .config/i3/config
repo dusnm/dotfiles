@@ -29,10 +29,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id dmenu_run
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -41,10 +41,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -53,10 +53,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+apostrophe split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+slash split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -132,10 +132,10 @@ bindsym $mod+Shift+r restart
 
 # resize window
 mode "resize" {
-    bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym semicolon resize grow width 10 px or 10 ppt
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
     # same bindings, but for the arrow keys
     bindsym Left resize shrink width 10 px or 10 ppt
@@ -207,7 +207,6 @@ bindsym $mod+Shift+t exec $terminal -e ranger
 bindsym $mod+Shift+f exec firefox
 bindsym Print exec --no-startup-id cd ~/Pictures/Screenshots/ && scrot -q 100
 bindsym --release Shift+Print exec --no-startup-id cd ~/Pictures/Screenshots/ && scrot -q 100 -s
-bindsym $mod+Shift+h exec $terminal -e htop
 bindsym $mod+Shift+m exec --no-startup-id $terminal -e ncmpcpp
 bindsym $mod+Shift+p exec --no-startup-id ~/.scripts/mansplain
 bindsym $mod+Shift+s exec --no-startup-id ~/.scripts/ducksearch
