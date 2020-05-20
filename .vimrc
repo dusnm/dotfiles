@@ -26,6 +26,8 @@ noremap <silent> <C-Left> :vertical resize +3<CR>
 noremap <silent> <C-Right> :vertical resize -3<CR>
 noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :resize -3<CR>
+noremap <C-m> :MarkdownPreview<CR>
+noremap <C-o> :MarkdownPreviewStop<CR>
 
 call plug#begin()
 
@@ -41,10 +43,16 @@ Plug 'stephpy/vim-php-cs-fixer'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'AlessandroYorba/Sierra'
 Plug 'vim-airline/vim-airline'
+Plug 'dylanaraps/wal.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'ap/vim-css-color'
 
 call plug#end()
 
-colorscheme dracula
+set background=dark
+colorscheme gruvbox
+
+hi Normal guibg=NONE ctermbg=NONE
 
 let g:airline_powerline_fonts = 1
 
