@@ -1,0 +1,11 @@
+#!/bin/sh
+
+choice=`printf "bashrc\nvimrc\ni3\naliases\nfunctions" | dmenu -p "Choose a config file:"`
+
+case $choice in
+    "bashrc") $TERMINAL -e vim ~/.bashrc;;
+    "vimrc") $TERMINAL -e vim ~/.vimrc;;
+    "i3") $TERMINAL -e vim ~/.config/i3/config;;
+    "aliases") $TERMINAL -e vim ~/.bash_sources/aliases;;
+    "functions") $TERMINAL -e vim ~/.bash_sources/functions;;
+esac

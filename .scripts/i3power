@@ -1,6 +1,6 @@
 #!/bin/sh
 
-choice=`printf "Cancel\nLogout\nSleep\nReboot\nShutdown" | dmenu -p "Please select an option:"`
+choice=`printf "Cancel\nLogout\nSleep\nReboot\nShutdown" | dmenu -p "Power Menu:"`
 
 case $choice in
     "Logout") i3-msg exit

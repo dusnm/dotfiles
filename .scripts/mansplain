@@ -1,3 +1,3 @@
 #!/bin/sh
 
-man -k . | dmenu -l 30 | awk '{print $1}' | xargs -r man -Tpdf | zathura -
+man -k . | dmenu -c -l 30 | awk '{print $1}' | xargs -r man -Tpdf | zathura -

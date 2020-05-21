@@ -1,0 +1,9 @@
+#!/bin/sh
+
+search=$(echo "" | dmenu -p "Search Wikipedia:")
+
+if [ "$search" = "" ]; then
+    xdg-open "https://en.wikipedia.org/"
+else
+    xdg-open "https://en.wikipedia.org/w/index.php?search=$search"
+fi

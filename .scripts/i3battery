@@ -2,7 +2,7 @@
 state=`acpi | awk '/^Battery/ {print $3}'`
 percentage=`acpi | awk '/^Battery/ {print $4}'`
 if [ "$state" = "Charging," ]; then
-    echo 🔌 ${percentage/%?/}
+    echo  ${percentage/%?/}
 else
-    echo 🔋 ${percentage/%?/}
+    echo  ${percentage/%?/}
 fi

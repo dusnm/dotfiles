@@ -1,0 +1,12 @@
+#!/bin/sh
+
+choice=`printf "English (US)\nSerbian (Latin)\nSerbian" | dmenu -p "Choose a layout:"`;
+
+case $choice in
+    "English (US)")
+        setxkbmap us;;
+    "Serbian (Latin)")
+        setxkbmap rs latin;;
+    "Serbian")
+        setxkbmap rs
+esac

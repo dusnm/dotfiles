@@ -1,0 +1,23 @@
+#!/bin/sh
+
+VIDEO_DIR="$HOME/Videos/youtube-downloads/"
+MUSIC_DIR="$HOME/Music/youtube-downloads/"
+
+VIDEO_URL=`xclip -selection clipboard -o`
+
+if [ ! -d $VIDEO_DIR ]; then
+    mkdir $VIDEO_DIR
+fi
+
+if [ ! -d $MUSIC_DIR ]; then
+    mkdir $MUSIC_DIR
+fi
+
+CHOICE=`printf "Video\nAudio" | dmenu -p "What to download:"`
+
+case $CHOICE in
+    "Video")
+        cd $VIDEO_DIR && youtube-dl $VIDEO_URL;;
+    "Audio")
+        cd $MUSIC_DIR && youtube-dl --extract-audio --audio-format mp3 $VIDEO_URL;;
+esac

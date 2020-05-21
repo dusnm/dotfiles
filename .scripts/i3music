@@ -1,0 +1,13 @@
+#!/bin/sh
+
+TRACK=$(mpc | awk 'NR==1')
+STATE=$(mpc | awk 'NR==2 {print $1}')
+
+case $STATE in
+    "[paused]") echo "$TRACK $STATE";;
+    "[playing]") echo $TRACK;;
+esac
+
+case $BLOCK_BUTTON in
+    1) $TERMINAL -e ncmpcpp;;
+esac

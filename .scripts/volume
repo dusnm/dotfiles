@@ -1,7 +1,7 @@
 #!/bin/bash
 
 case $BLOCK_BUTTON in
-	1) setsid "$TERMINAL" -e pulsemixer & ;;
+	1) setsid pavucontrol ;;
 	3) pulsemixer --toggle-mute ;;
 	4) pulsemixer --change-volume +5 ;;
 	5) pulsemixer --change-volume -5 ;;
@@ -11,13 +11,5 @@ esac
 
 vol=$(pulsemixer --get-volume | awk '{print $1}')
 
-if [ "$vol" -gt "70" ]; then
-	icon="🔊"
-elif [ "$vol" -lt "30" ]; then
-	icon="🔈"
-else
-	icon="🔉"
-fi
-
-printf "%s %s%%\\n" "$icon" "$vol"
+printf "%s %s%%\\n" "" "$vol"
 
