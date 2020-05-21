@@ -4,6 +4,7 @@
 !  _ /  \| | |  __/\__ \ (_) | |_| | | | (_|  __/\__ \
 ! (_)_/\_\_|  \___||___/\___/ \__,_|_|  \___\___||___/
 !
+! File: ~/.Xresources
 ! Author: Dusan Mitrovic <dusan@dusanmitrovic.xyz>
 
 Xft.dpi: 96

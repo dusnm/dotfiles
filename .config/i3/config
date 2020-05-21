@@ -5,6 +5,8 @@
 # |_|____/ \_/\_/ |_| |_| |_|
 #
 # i3wm configuration file
+# 
+# File: ~/.config/i3/config
 # Author: Dusan Mitrovic <dusan@dusanmitrovic.xyz>
 
 # Set SUPER as the mod key
@@ -216,10 +218,3 @@ bindsym $mod+Shift+z exec --no-startup-id ~/.scripts/comicsearch
 bindsym $mod+Shift+Return exec --no-startup-id  ~/.scripts/i3key
 bindsym $mod+Shift+n exec --no-startup-id ~/.scripts/i3locker
 bindsym $mod+Shift+b exec --no-startup-id ~/.scripts/config_editor
-
-# Autostarts
-exec xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1 # Enable tap to click
-exec wal -R
-exec lxsession
-exec --no-startup-id mpDris2
-exec --no-startup-id picom
