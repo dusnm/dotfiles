@@ -136,6 +136,7 @@ alias vhosts="sudo vim /etc/httpd/conf/extra/httpd-vhosts.conf"
 alias vi3="vim ~/.config/i3/config"
 alias vivim="vim ~/.vimrc"
 alias viz="vim ~/.zshrc"
+alias ls="exa --icons --group-directories-first -h"
 
 # Pywal
 (cat ~/.cache/wal/sequences &)
