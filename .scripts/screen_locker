@@ -1,7 +1,11 @@
 #!/bin/bash
 
-scrot /tmp/screen.png
+SCREENSHOT="/tmp/screen.png"
 
-[[ -f ~/.config/i3/lockicon.png  ]] && convert /tmp/screen.png -swirl 360 ~/.config/i3/lockicon.png -gravity center -composite -matte /tmp/screen.png
+[[ -f $SCREENSHOT ]] && rm $SCREENSHOT
 
-i3lock -e -f -c 000000 -i /tmp/screen.png
+scrot $SCREENSHOT
+
+[[ -f ~/.config/i3/lockicon.png  ]] && convert $SCREENSHOT -swirl 360 ~/.config/i3/lockicon.png -gravity center -composite -matte $SCREENSHOT
+
+i3lock -e -f -c 000000 -i $SCREENSHOT
