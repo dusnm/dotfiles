@@ -212,9 +212,9 @@ bindsym --release Shift+Print exec --no-startup-id cd ~/Pictures/Screenshots/ &&
 bindsym $mod+Shift+m exec $terminal -e ncmpcpp
 bindsym $mod+Shift+p exec --no-startup-id ~/.scripts/mansplain
 bindsym $mod+Shift+s exec --no-startup-id ~/.scripts/ducksearch
-bindsym $mod+Shift+x exec --no-startup-id ~/.scripts/i3power
+bindsym $mod+Shift+x exec --no-startup-id ~/.scripts/power_menu
 bindsym $mod+Shift+e exec --no-startup-id ~/.scripts/dmenuunicode
 bindsym $mod+Shift+z exec --no-startup-id ~/.scripts/comicsearch
-bindsym $mod+Shift+Return exec --no-startup-id  ~/.scripts/i3key
-bindsym $mod+Shift+n exec --no-startup-id ~/.scripts/i3locker
-bindsym $mod+Shift+b exec --no-startup-id ~/.scripts/config_editor
+bindsym $mod+Shift+Return exec --no-startup-id  ~/.scripts/language_switcher
+bindsym $mod+Shift+n exec --no-startup-id ~/.scripts/screen_locker
+bindsym $mod+Shift+b exec $terminal -e newsboat
