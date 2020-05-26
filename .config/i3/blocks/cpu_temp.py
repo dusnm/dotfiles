@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+#
+# Copyright (C) 2020 Dusan Mitrovic <dusan@dusanmitrovic.xyz>
+# Licensed under the terms of the GNU GPL v3 only
+#
+# i3blocks script to get the temperature of the CPU
 from psutil import sensors_temperatures
 
 def format_output(temperature):

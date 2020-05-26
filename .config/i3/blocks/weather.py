@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-
+#
+# Copyright (C) 2020 Dusan Mitrovic <dusan@dusanmitrovic.xyz>
+# Licensed under the terms of the GNU GPL v3 only
+#
+# i3blocks script to get the current weather conditions and temperature from accuweather.com
 import requests
 import json
 import os

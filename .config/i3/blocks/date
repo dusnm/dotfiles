@@ -1,5 +1,9 @@
 #!/bin/sh
-
+#
+# Copyright (C) 2020 Dusan Mitrovic <dusan@dusanmitrovic.xyz>
+# Licensed under the terms of the GNU GPL v3 only
+#
+# i3blocks script to print the date, runs calcurse on click
 case $BLOCK_BUTTON in
     1) $TERMINAL -e calcurse ;;
 esac

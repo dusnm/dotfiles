@@ -1,5 +1,9 @@
 #!/bin/sh
-
+#
+# Copyright (C) 2020 Dusan Mitrovic <dusan@dusanmitrovic.xyz>
+# Licensed under the terms of the GNU GPL v3 only
+#
+# i3blocks script to get the now playing information from MPD, runs ncmpcpp on click
 TRACK=$(mpc | awk 'NR==1')
 STATE=$(mpc | awk 'NR==2 {print $1}')
 

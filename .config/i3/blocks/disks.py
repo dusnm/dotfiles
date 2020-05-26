@@ -1,5 +1,9 @@
 #!/bin/env python3
-
+#
+# Copyright (C) 2020 Dusan Mitrovic <dusan@dusanmitrovic.xyz>
+# Licensed under the terms of the GNU GPL v3 only
+#
+# i3blocks script to get disk usage information
 from psutil import disk_partitions
 from psutil import disk_usage
 from psutil._common import bytes2human
