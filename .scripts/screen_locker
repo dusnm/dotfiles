@@ -6,6 +6,6 @@ SCREENSHOT="/tmp/screen.png"
 
 scrot $SCREENSHOT
 
-[[ -f ~/.config/i3/lockicon.png  ]] && convert $SCREENSHOT -swirl 360 ~/.config/i3/lockicon.png -gravity center -composite -matte $SCREENSHOT
+[[ -f ~/.config/i3/lockicon.png  ]] && convert $SCREENSHOT -blur 0x10 ~/.config/i3/lockicon.png -gravity center -composite -matte $SCREENSHOT
 
 i3lock -e -f -c 000000 -i $SCREENSHOT
