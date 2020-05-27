@@ -218,3 +218,4 @@ bindsym $mod+Shift+z exec --no-startup-id ~/.scripts/comicsearch
 bindsym $mod+Shift+Return exec --no-startup-id  ~/.scripts/language_switcher
 bindsym $mod+Shift+n exec --no-startup-id ~/.scripts/screen_locker
 bindsym $mod+Shift+b exec $terminal -e newsboat
+bindsym $mod+m exec $terminal -e neomutt
