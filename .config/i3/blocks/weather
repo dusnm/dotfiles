@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+# Copyright (C) 2020 Dusan Mitrovic <dusan@dusanmitrovic.xyz>
+# Licensed under the terms of the GNU GPL v3 only
+#
+# i3blocks script to get the current weather conditions and temperature from accuweather.com
+# Depends on json2tsv <https://pypi.org/project/json2tsv/>
+environment_variables="$HOME/.config/.environment"
+
+[ ! -f $environment_variables ] && exit 1
+[ ! -f /usr/bin/json2tsv ] && exit 1
+
+source $environment_variables
+
+api_url="http://dataservice.accuweather.com/currentconditions/v1"
+location_key="298173"
+
+data=$(curl -s -X GET "$api_url/$location_key?apikey=$ACCUWEATHER_API_KEY" | json2tsv Temperature.Metric.Value Link WeatherText)
+
+temperature="$(awk '{print $1}' <<< $data)°C"
+webpage=$(awk '{print $2}' <<< $data)
+conditions=$(awk '{print $3,$4}' <<< $data)
+
+case $BLOCK_BUTTON in
+    1) firefox -new-tab $webpage ;;
+esac
+
+echo "$temperature $conditions"
