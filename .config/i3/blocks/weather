@@ -3,7 +3,7 @@
 # Copyright (C) 2020 Dusan Mitrovic <dusan@dusanmitrovic.xyz>
 # Licensed under the terms of the GNU GPL v3 only
 #
-# i3blocks script to get the current weather conditions and temperature from accuweather.com
+# i3blocks script to get the current weather conditions and temperature from openweathermap.org
 # Depends on json2tsv <https://pypi.org/project/json2tsv/>
 environment_variables="$HOME/.config/.environment"
 
@@ -12,14 +12,14 @@ environment_variables="$HOME/.config/.environment"
 
 source $environment_variables
 
-api_url="http://dataservice.accuweather.com/currentconditions/v1"
-location_key="298173"
+api_url="https://api.openweathermap.org/data/2.5/weather"
+city_id="787516"
+webpage="https://openweathermap.org/city/$city_id"
 
-data=$(curl -s -X GET "$api_url/$location_key?apikey=$ACCUWEATHER_API_KEY" | json2tsv Temperature.Metric.Value Link WeatherText)
+json=$(curl -s -X GET "$api_url?id=$city_id&units=metric&appid=$OPENWEATHER_API_KEY")
 
-temperature="$(awk '{print $1}' <<< $data)°C"
-webpage=$(awk '{print $2}' <<< $data)
-conditions=$(awk '{print $3,$4}' <<< $data)
+temperature="$(echo $json | json2tsv main.temp)°C"
+conditions=$(echo $json | json2tsv weather | json2tsv main)
 
 case $BLOCK_BUTTON in
     1) firefox -new-tab $webpage ;;
