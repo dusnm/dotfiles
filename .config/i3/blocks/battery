@@ -4,10 +4,13 @@
 # Licensed under the terms of the GNU GPL v3 only
 #
 # i3blocks script to get the battery information
-state=`acpi | awk '/^Battery/ {print $3}'`
-percentage=`acpi | awk '/^Battery/ {print $4}'`
-if [ "$state" = "Charging," ]; then
-    echo  ${percentage/%?/}
-else
-    echo  ${percentage/%?/}
-fi
+battery="/sys/class/power_supply/BAT?"
+
+state=$(cat $battery/status)
+capacity=$(cat $battery/capacity | sed "s/$/%/g")
+
+[ $state = "Discharging" ] && icon=""
+[ $state = "Charging" ] && icon=""
+[ $state = "Full" ] && icon=""
+
+echo "$capacity $icon"
