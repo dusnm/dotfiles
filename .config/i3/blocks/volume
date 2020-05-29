@@ -13,10 +13,10 @@ esac
 
 [ "$(pulsemixer --get-mute)" = "1" ] && printf "🔇\\n" && exit
 
-    vol=$(pulsemixer --get-volume | awk '{print $2}')
+vol=$(pulsemixer --get-volume | awk '{print $2}')
 
-    [ $vol -le 35 ] && icon="🔈"
-    [ $vol -ge 35 ] && [ $vol -le 70 ] && icon="🔉"
-    [ $vol -ge 70 ] && icon="🔊"
+[ $vol -le 35 ] && icon="🔈"
+[ $vol -ge 35 ] && [ $vol -le 70 ] && icon="🔉"
+[ $vol -ge 70 ] && icon="🔊"
 
 echo "$icon $vol" | sed "s/$/%/g"
