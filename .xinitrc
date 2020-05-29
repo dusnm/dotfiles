@@ -38,6 +38,9 @@ fi
 # Source the ~/.xprofile file
 [ -f ~/.xprofile ] && . ~/.xprofile
 
+# Source the environment file
+[ -f ~/.config/.environment ] && . ~/.config/.environment
+
 # start some nice programs
 
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
