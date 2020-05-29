@@ -54,7 +54,7 @@ Xft.lcdfilter: lcdfilter
 
 !Dmenu config
 dmenu.font: UbuntuMono Nerd Font:size=12
-dmenu.background: #e1d9d4
-dmenu.foreground: #8e7159
-dmenu.selbackground: #8e7159
-dmenu.selforeground: #e1d9d4
+dmenu.background: #656388
+dmenu.foreground: #f4cdbd
+dmenu.selbackground: #f4cdbd
+dmenu.selforeground: #656388

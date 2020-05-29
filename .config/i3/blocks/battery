@@ -13,4 +13,4 @@ capacity=$(cat $battery/capacity | sed "s/$/%/g")
 [ $state = "Charging" ] && icon="🔌"
 [ $state = "Full" ] && icon="⚡"
 
-echo "$capacity $icon"
+echo "$icon $capacity"
