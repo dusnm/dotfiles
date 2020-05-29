@@ -13,11 +13,11 @@ webpage="https://openweathermap.org/city/$city_id"
 
 json=$(curl -s -X GET "$api_url?id=$city_id&units=metric&appid=$OPENWEATHER_API_KEY")
 
-temperature="$(echo $json | json2tsv main.temp)°C"
+temperature="$(echo $json | json2tsv main.temp | awk '{printf "%.1f", $1}')°C"
 conditions=$(echo $json | json2tsv weather | json2tsv main)
 
 case $BLOCK_BUTTON in
-    1) firefox -new-tab $webpage ;;
+    1) firefox -new-tab $webpage & ;;
 esac
 
 echo "$temperature $conditions"
