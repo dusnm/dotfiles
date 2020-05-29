@@ -78,16 +78,16 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
-set $ws1 "1: Main "
-set $ws2 "2: Web Browsers "
-set $ws3 "3: Development "
-set $ws4 "4: Terminals "
-set $ws5 "5: Music "
-set $ws6 "6: Editor "
-set $ws7 "7: VoIP "
-set $ws8 "8: Gamingi "
-set $ws9 "9 Other 1 "
-set $ws10 "10 Other 2 "
+set $ws1 "1: "
+set $ws2 "2: "
+set $ws3 "3: "
+set $ws4 "4: "
+set $ws5 "5: "
+set $ws6 "6: "
+set $ws7 "7: "
+set $ws8 "8: "
+set $ws9 "9 "
+set $ws10 "10 "
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -177,7 +177,7 @@ set $sig10 pkill -RTMIN+10 i3blocks
 # Bar config
 bar {
     position top
-    font pango:Hack Nerd Font 9
+    font pango:Hack Nerd Font 10
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
     colors {
         background $bg
