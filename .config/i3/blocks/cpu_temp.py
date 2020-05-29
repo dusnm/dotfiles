@@ -7,7 +7,7 @@
 from psutil import sensors_temperatures
 
 def format_output(temperature):
-    return " " + temperature + "°C"
+    return temperature + "°C"
 
 current_cpu_temp = sensors_temperatures()['k10temp'][0].current
 

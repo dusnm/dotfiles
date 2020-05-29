@@ -9,8 +9,8 @@ battery="/sys/class/power_supply/BAT?"
 state=$(cat $battery/status)
 capacity=$(cat $battery/capacity | sed "s/$/%/g")
 
-[ $state = "Discharging" ] && icon=""
-[ $state = "Charging" ] && icon=""
-[ $state = "Full" ] && icon=""
+[ $state = "Discharging" ] && icon="🔋"
+[ $state = "Charging" ] && icon="🔌"
+[ $state = "Full" ] && icon="⚡"
 
 echo "$capacity $icon"
