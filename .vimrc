@@ -28,6 +28,7 @@ syntax on
 
 let mapleader=" "
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'codedark'
 
 noremap <silent> <C-Left> :vertical resize +3<CR>
 noremap <silent> <C-Right> :vertical resize -3<CR>
@@ -63,11 +64,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'dylanaraps/wal.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'ap/vim-css-color'
+Plug 'tomasiser/vim-code-dark'
 
 call plug#end()
 
 set background=dark
-colorscheme gruvbox
+colorscheme codedark
 
 aug i3config_ft_detection
   au!
