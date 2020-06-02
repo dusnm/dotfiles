@@ -9,7 +9,7 @@ from psutil import disk_usage
 from psutil._common import bytes2human
 
 def format_output(mountpoint, used_space, total_space):
-    return " " + mountpoint + " " + used_space + "/" + total_space
+    return "📁 " + mountpoint + " " + used_space + "/" + total_space
 
 partitions = disk_partitions()
 ext4_mountpoints = []

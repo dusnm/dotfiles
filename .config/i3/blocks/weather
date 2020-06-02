@@ -5,12 +5,7 @@
 #
 # i3blocks script to get the current weather conditions and temperature from openweathermap.org
 # Depends on json2tsv <https://pypi.org/project/json2tsv/>
-environment_variables="$HOME/.config/.environment"
-
-[ ! -f $environment_variables ] && exit 1
 [ ! -f /usr/bin/json2tsv ] && exit 1
-
-source $environment_variables
 
 api_url="https://api.openweathermap.org/data/2.5/weather"
 city_id="787516"
@@ -18,11 +13,11 @@ webpage="https://openweathermap.org/city/$city_id"
 
 json=$(curl -s -X GET "$api_url?id=$city_id&units=metric&appid=$OPENWEATHER_API_KEY")
 
-temperature="$(echo $json | json2tsv main.temp)°C"
+temperature="$(echo $json | json2tsv main.temp | awk '{printf "%.1f", $1}')°C"
 conditions=$(echo $json | json2tsv weather | json2tsv main)
 
 case $BLOCK_BUTTON in
-    1) firefox -new-tab $webpage ;;
+    1) firefox -new-tab $webpage & ;;
 esac
 
 echo "$temperature $conditions"

@@ -25,6 +25,11 @@ status, response = imap.search(None, 'UNSEEN')
 
 unread_messages_count = len(response[0].split())
 
-print(unread_messages_count)
+if unread_messages_count == 0:
+    icon = "📪"
+else:
+    icon = "📬"
+
+print(icon + " " + str(unread_messages_count))
 
 imap.logout()
