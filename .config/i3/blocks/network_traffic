@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+# Copyright (C) 2020 Dusan Mitrovic <dusan@dusanmitrovic.xyz>
+# Licensed under the terms of the GNU GPL v3 only
+#
+# i3blocks script to show the network traffic
+interface="wlo1"
+
+logfile="/dev/shm/logfile"
+
+received_bytes=$(cat /sys/class/net/$interface/statistics/rx_bytes)
+transmitted_bytes=$(cat /sys/class/net/$interface/statistics/tx_bytes)
+
+old_upstream_data=0
+old_downstream_data=0
+
+[ -f "$logfile" ] && old_downstream_data=$(cat $logfile | awk '{print $1}') old_upstream_data=$(cat $logfile | awk '{print $2}')
+
+upstream_rate=$((($transmitted_bytes - $old_upstream_data) / 1024))
+downstream_rate=$((($received_bytes - $old_downstream_data) / 1024))
+
+echo "$received_bytes $transmitted_bytes" > $logfile
+
+echo "🔻 ${downstream_rate}kiB 🔺 ${upstream_rate}kiB"
