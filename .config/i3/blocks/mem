@@ -4,8 +4,10 @@
 # Licensed under the terms of the GNU GPL v3 only
 #
 # i3blocks script to get the RAM information
+icon="🧠"
+
 case $BLOCK_BUTTON in
 	1) notify-send "$(ps axch -o cmd:15,%mem --sort=-%mem | head)" ;;
 esac
 
-free -h | awk '/^Mem/ {print $3 "/" $2}'
+echo "$icon $(free -h | awk '/^Mem/ {print $3 "/" $2}')"

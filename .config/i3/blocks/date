@@ -4,8 +4,10 @@
 # Licensed under the terms of the GNU GPL v3 only
 #
 # i3blocks script to print the date, runs calcurse on click
+icon="🗓"
+
 case $BLOCK_BUTTON in
     1) $TERMINAL -e calcurse ;;
 esac
 
-date +%d/%m/%Y
+echo "$icon $(date +%d/%m/%Y)"

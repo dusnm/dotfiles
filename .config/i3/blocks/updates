@@ -4,9 +4,11 @@
 # Licensed under the terms of the GNU GPL v3 only
 #
 # i3blocks script to check for Arch Linux (Or any arch-based distro) updates
+icon="📦"
+
 case $BLOCK_BUTTON in
     1) $TERMINAL -e sudo pacman -Syu ;;
     3) notify-send "$(pacman -Qu)" ;;
 esac
 
-pacman -Qu | wc -l
+echo "$icon $(pacman -Qu | wc -l)"

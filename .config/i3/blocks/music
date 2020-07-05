@@ -1,17 +1,20 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright (C) 2020 Dusan Mitrovic <dusan@dusanmitrovic.xyz>
 # Licensed under the terms of the GNU GPL v3 only
 #
 # i3blocks script to get the now playing information from MPD, runs ncmpcpp on click
-TRACK=$(mpc | awk 'NR==1')
-STATE=$(mpc | awk 'NR==2 {print $1}')
+song_info=$(mpc -f %title%)
+track=$(awk 'NR==1' <<< $song_info)
+state=$(awk 'NR==2 {print $1}' <<< $song_info)
+icon="🎧"
 
-case $STATE in
-    "[paused]") echo "$TRACK $STATE";;
-    "[playing]") echo $TRACK;;
+case $state in
+    "[paused]") echo "$icon $track $state" | sed "s/\[/\(/g;s/\]/\)/g";;
+    "[playing]") echo "$icon $track";;
 esac
 
 case $BLOCK_BUTTON in
-    1) $TERMINAL -e ncmpcpp;;
+    1) $TERMINAL -e ncmpcpp &;;
+    3) xdg-open "https://duckduckgo.com/?q=$(mpc | awk 'NR==1')+lyrics"
 esac

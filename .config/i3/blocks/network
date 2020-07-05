@@ -4,4 +4,9 @@
 # Licensed under the terms of the GNU GPL v3 only
 #
 # i3blocks script to print the current private IP address of the network interface
-hostname -i | awk '{print $1}'
+interface="enp2s0"
+icon="🌍"
+
+ip_address=$(ip addr show $interface | grep 192 | awk '{print $2}' | sed "s/...$//g")
+
+[ -z "$ip_address" ] && echo "$icon Unplugged." || echo "$icon $ip_address"

@@ -25,7 +25,7 @@ status, response = imap.search(None, 'UNSEEN')
 
 unread_messages_count = len(response[0].split())
 
-if unread_messages_count == 0:
+if 0 == unread_messages_count:
     icon = "📪"
 else:
     icon = "📬"
@@ -33,3 +33,8 @@ else:
 print(icon + " " + str(unread_messages_count))
 
 imap.logout()
+
+mouse_event = os.getenv('BLOCK_BUTTON')
+
+if "1" == mouse_event:
+    os.system("thunderbird > /dev/null 2>&1")

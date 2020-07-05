@@ -7,6 +7,7 @@
 from psutil import disk_partitions
 from psutil import disk_usage
 from psutil._common import bytes2human
+import os
 
 def format_output(mountpoint, used_space, total_space):
     return "📁 " + mountpoint + " " + used_space + "/" + total_space
@@ -27,3 +28,7 @@ for mountpoint in ext4_mountpoints:
 
 print(" ".join(results))
 
+if os.getenv('BLOCK_BUTTON') == '1':
+    os.system('$TERMINAL -e ranger ~ &')
+elif os.getenv('BLOCK_BUTTON') == '3':
+    os.system('pcmanfm ~ > /dev/null 2>&1')
