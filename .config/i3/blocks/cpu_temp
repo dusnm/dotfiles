@@ -4,6 +4,6 @@
 # Licensed under the terms of the GNU GPL v3 only
 #
 # i3blocks script to get the CPU temperature
-icon="📈"
+icon="🌡️"
 
 echo "$icon $(sensors | grep temp1 | awk '{print $2}' | sed "s/^.//g")"
