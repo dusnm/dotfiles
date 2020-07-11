@@ -6,55 +6,108 @@
 !
 ! File: ~/.Xresources
 ! Author: Dusan Mitrovic <dusan@dusanmitrovic.xyz>
-
-Xft.dpi: 96
-Xft.antialias: true
-Xft.hinting: true
-Xft.rgba: rgb
-Xft.autohint: true
-Xft.hintstyle: hintfull
-Xft.lcdfilter: lcdfilter
+! Colors: gruvbox.dark
 
 ! special
-*.foreground:   #a39e9b
-*.background:   #2e2e2e
-*.cursorColor:  #a39e9b
+#define FOREGROUND          #c7ccd1
+#define BACKGROUND          #1c2023
+#define CURSOR_COLOR        #c7ccd1
+#define CURSOR_GUIDE_COLOR  #2e2a29
+#define CURSOR_TEXT_COLOR   #1e1e1e
+#define BADGE_COLOR         #ca480e
+#define BOLD_COLOR          #ffffff
+#define LINK_COLOR          #ca480e
+#define SELECTED_TEXT_COLOR #534a42
+#define SELECTION_COLOR     #e6d4a3
 
 ! black
-*.color0:       #2f1e2e
-*.color8:       #776e71
+#define BLACK               #1e1e1e
+#define LIGHT_BLACK         #7f7061
 
 ! red
-*.color1:       #ef6155
-*.color9:       #ef6155
+#define RED                 #be0f17
+#define LIGHT_RED           #f73028
 
 ! green
-*.color2:       #48b685
-*.color10:      #48b685
+#define GREEN               #868715
+#define LIGHT_GREEN         #aab01e
 
 ! yellow
-*.color3:       #fec418
-*.color11:      #fec418
+#define YELLOW              #cc881a
+#define LIGHT_YELLOW        #f7b125
 
 ! blue
-*.color4:       #06b6ef
-*.color12:      #06b6ef
+#define BLUE                #377375
+#define LIGHT_BLUE          #719586
 
 ! magenta
-*.color5:       #815ba4
-*.color13:      #815ba4
+#define MAGENTA             #a04b73
+#define LIGHT_MAGENTA       #c77089
 
 ! cyan
-*.color6:       #5bc4bf
-*.color14:      #5bc4bf
+#define CYAN                #578e57
+#define LIGHT_CYAN          #7db669
 
 ! white
-*.color7:       #a39e9b
-*.color15:      #e7e9db
+#define WHITE               #978771
+#define LIGHT_WHITE         #e6d4a3
+
+! special
+*.foreground:               FOREGROUND
+*.background:               BACKGROUND
+*.cursorColor:              CURSOR_COLOR
+*.cursorGuideColor:         CURSOR_GUIDE_COLOR
+*.cursorTextColor:          CURSOR_TEXT_COLOR
+*.badgeColor:               BADGE_COLOR
+*.boldColor:                BOLD_COLOR
+*.linkColor:                LINK_COLOR
+*.selectedTextColor:        SELECTED_TEXT_COLOR
+*.selectionColor:           SELECTION_COLOR
+
+! black
+*.color0:                   BLACK
+*.color8:                   LIGHT_BLACK
+
+! red
+*.color1:                   RED
+*.color9:                   LIGHT_RED
+
+! green
+*.color2:                   GREEN
+*.color10:                  LIGHT_GREEN
+
+! yellow
+*.color3:                   YELLOW
+*.color11:                  LIGHT_YELLOW
+
+! blue
+*.color4:                   BLUE
+*.color12:                  LIGHT_BLUE
+
+! magenta
+*.color5:                   MAGENTA
+*.color13:                  LIGHT_MAGENTA
+
+! cyan
+*.color6:                   CYAN
+*.color14:                  LIGHT_CYAN
+
+! white
+*.color7:                   WHITE
+*.color15:                  LIGHT_WHITE
+
+! font config
+Xft.dpi:                    96
+Xft.antialias:              true
+Xft.hinting:                true
+Xft.rgba:                   rgb
+Xft.autohint:               true
+Xft.hintstyle:              hintfull
+Xft.lcdfilter:              lcdfilter
 
 !Dmenu config
-dmenu.font: UbuntuMono Nerd Font:size=12
-dmenu.background: #656388
-dmenu.foreground: #f4cdbd
-dmenu.selbackground: #f4cdbd
-dmenu.selforeground: #656388
+dmenu.font:                 UbuntuMono Nerd Font:size=13
+dmenu.background:           BACKGROUND
+dmenu.foreground:           BOLD_COLOR
+dmenu.selbackground:        COLOR9
+dmenu.selforeground:        BOLD_COLOR
