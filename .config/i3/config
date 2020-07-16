@@ -1,11 +1,11 @@
-#  _ _____                   
-# (_)___ /_      ___ __ ___  
-# | | |_ \ \ /\ / / '_ ` _ \ 
+#  _ _____
+# (_)___ /_      ___ __ ___
+# | | |_ \ \ /\ / / '_ ` _ \
 # | |___) \ V  V /| | | | | |
 # |_|____/ \_/\_/ |_| |_| |_|
 #
 # i3wm configuration file
-# 
+#
 # File: ~/.config/i3/config
 # Author: Dusan Mitrovic <dusan@dusanmitrovic.xyz>
 
@@ -28,7 +28,7 @@ bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id py-dmenu-desktop.py -i -l 30 -c -p "Run: "
 
 # change focus
 bindsym $mod+h focus left
@@ -78,16 +78,16 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
-set $ws1 "1: "
-set $ws2 "2: "
-set $ws3 "3: "
-set $ws4 "4: "
-set $ws5 "5: "
-set $ws6 "6: "
-set $ws7 "7: "
-set $ws8 "8: "
-set $ws9 "9 "
-set $ws10 "10 "
+set $ws1 "1 🖥"
+set $ws2 "2 🌍"
+set $ws3 "3 🚀"
+set $ws4 "4 📉"
+set $ws5 "5 🎧"
+set $ws6 "6 🖊"
+set $ws7 "7 🎤"
+set $ws8 "8 🎮"
+set $ws9 "9 🌸"
+set $ws10 "10 🌸"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -123,6 +123,7 @@ for_window [class="Spotify"] move to workspace $ws5
 # Gaps configuration
 gaps inner 10
 gaps outer 10
+smart_gaps on
 
 # Remove borders
 for_window [class="^.*"] border pixel 0
@@ -155,8 +156,8 @@ bindsym $mod+r mode "resize"
 
 # Color variables
 set $bg-urgent #e53935
-set_from_resource $fg i3wm.color7 #f0f0f0
-set_from_resource $bg i3wm.color2 #f0f0f0
+set_from_resource $fg i3wm.foreground #f0f0f0
+set_from_resource $bg i3wm.background #f0f0f0
 set_from_resource $bg-inactive i3wm.color4 #f0f0f0
 
 # window colors
@@ -177,7 +178,9 @@ set $sig10 pkill -RTMIN+10 i3blocks
 # Bar config
 bar {
     position top
-    font pango:Hack Nerd Font 10
+    output HDMI-0
+    tray_output HDMI-0
+    font pango:Hack Nerd Font 9
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
     colors {
         background $bg
@@ -190,19 +193,30 @@ bar {
 
 }
 
+bar {
+    position top
+    output DVI-D-0
+    tray_output none
+    colors {
+        background $bg
+        separator #cccccc
+        #                  border           background      text
+        focused_workspace  $bg              $bg             $fg
+        inactive_workspace $bg-inactive     $bg-inactive    $fg
+        urgent_workspace   $bg-urgent       $bg-urgent      $fg
+    }
+
+}
+
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% && $sig10 #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% && $sig10 #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle && $sig10 #mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% && $sig10 #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% && $sig10 #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle && $sig10 #mute sound
 
 # Media Player Controls
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-
-# Brightness Controls
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10 # Decrease the brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10 # Increase the brightness
 
 # Custom Bindings
 bindsym $mod+Shift+t exec $terminal -e ranger
@@ -218,4 +232,5 @@ bindsym $mod+Shift+z exec --no-startup-id ~/.scripts/comicsearch
 bindsym $mod+Shift+Return exec --no-startup-id  ~/.scripts/language_switcher
 bindsym $mod+Shift+n exec --no-startup-id ~/.scripts/screen_locker
 bindsym $mod+Shift+b exec $terminal -e newsboat
-bindsym $mod+m exec $terminal -e neomutt
+bindsym $mod+Shift+v exec $terminal -e nvim
+bindsym $mod+x move workspace to output right
