@@ -14,9 +14,9 @@
  */
 define('RSA_KEY_DIGEST_ALG', 'sha512');
 define('RSA_KEY_LENGTH', 4096);
-define('RSA_KEY_DIRECTORY', getcwd().'/keys');
-define('RSA_KEY_PUBLIC_KEY_PATH', getcwd().'/keys/public.pem');
-define('RSA_KEY_PRIVATE_KEY_PATH', getcwd().'/keys/private.pem');
+define('RSA_KEY_DIRECTORY', getcwd() . '/keys');
+define('RSA_KEY_PUBLIC_KEY_PATH', getcwd() . '/keys/public.pem');
+define('RSA_KEY_PRIVATE_KEY_PATH', getcwd() . '/keys/private.pem');
 
 /**
  * Generates a new RSA key pair in string representation with the provided options.
@@ -53,4 +53,4 @@ file_put_contents(RSA_KEY_PUBLIC_KEY_PATH, $public_key, LOCK_EX);
 // The private key must only be accessible by the owner, we set the permissions accordingly.
 chmod(RSA_KEY_PRIVATE_KEY_PATH, 0600);
 
-printf('Key generation complete. Output in: %s'.PHP_EOL, RSA_KEY_DIRECTORY);
+printf('Key generation complete. Output in: %s' . PHP_EOL, RSA_KEY_DIRECTORY);

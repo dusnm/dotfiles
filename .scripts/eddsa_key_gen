@@ -1,0 +1,46 @@
+#!/usr/bin/env php
+<?php
+
+define('KEY_DIRECTORY', getcwd() . '/keys');
+define('PRIVATE_KEY', KEY_DIRECTORY . '/private.key');
+define('PUBLIC_KEY', KEY_DIRECTORY . '/public.key');
+
+
+function main(): int
+{
+    try {
+        $keyPair = sodium_crypto_sign_keypair();
+        $privateKey = base64_encode(sodium_crypto_sign_secretkey($keyPair));
+        $publicKey = base64_encode(sodium_crypto_sign_publickey($keyPair));
+
+        if (!file_exists(KEY_DIRECTORY) && mkdir(KEY_DIRECTORY, 0755) === false) {
+            fprintf(STDERR, "Error while creating directory: %s" . PHP_EOL, KEY_DIRECTORY);
+            return 1;
+        }
+
+        if (file_put_contents(PRIVATE_KEY, $privateKey, LOCK_EX) === false) {
+            fprintf(STDERR, "Error while writing private key: %s" . PHP_EOL, PRIVATE_KEY);
+            return 1;
+        }
+
+
+        if (file_put_contents(PUBLIC_KEY, $publicKey, LOCK_EX) === false) {
+            fprintf(STDERR, "Error while writing public key: %s" . PHP_EOL, PRIVATE_KEY);
+            return 1;
+        }
+
+        if (!chmod(PRIVATE_KEY, 0600)) {
+            fprintf(STDERR, "Error while setting 0600 permission on private key: %s" . PHP_EOL, PRIVATE_KEY);
+            return 1;
+        }
+        fprintf(STDOUT, 'Key generation complete. Output in: %s' . PHP_EOL, KEY_DIRECTORY);
+    } catch (Throwable $e) {
+        fprintf(STDERR, "Error: %s" . PHP_EOL, $e->getMessage());
+        return 1;
+    }
+
+    return 0;
+}
+
+
+exit(main());
